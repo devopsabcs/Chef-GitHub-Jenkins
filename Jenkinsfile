@@ -14,7 +14,7 @@ pipeline {
                         echo "Skipping CheDk install - allready installed"
                     } else {
                         sh 'export CHEF_LICENSE=accepted'
-                        sh 'sudo apt-get install -y wget'
+                        sh 'sudo apt-get install wget -y'
                         sh 'wget https://packages.chef.io/files/stable/chefdk/3.8.14/ubuntu/18.04/chefdk_3.8.14-1_amd64.deb'
                         sh 'sudo dpkg -i chefdk_3.8.14-1_amd64.deb'  
                     }
