@@ -25,6 +25,7 @@ pipeline {
             steps {
                 git credentialsId: 'f846bf41-a11e-4d16-9547-c75ee73a9acf', url: 'git@github.com:tverdich/apache.git'
             }
+        }
         stage("Install Kitchen Docker gem")    
             steps {
                     sh 'chef gem install kitchen-docker'
