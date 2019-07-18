@@ -6,9 +6,12 @@ pipeline {
                 sh "sudo rm -rf $WORKSPACE/*"
             }
         }
-        stage('Second stage') {
+        stage('Installing ChefDK') {
             steps {
-                echo "Second stage"
+                sh 'export CHEF_LICENSE=accepted'
+                sh 'sudo apt-get install -y wget'
+                sh 'wget https://packages.chef.io/files/stable/chefdk/3.8.14/ubuntu/18.04/chefdk_3.8.14-1_amd64.deb'
+                sh 'sudo dpkg -i chefdk_3.8.14-1_amd64.deb'   
             }
         }
         stage('Third Stage') {
