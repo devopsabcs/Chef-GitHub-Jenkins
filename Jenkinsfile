@@ -8,6 +8,11 @@ pipeline {
         }
         stage('Installing ChefDK') {
             steps {
+                scripy {
+                    def exists = fileExits '/usr/bin/chef-client'
+                    if (exists) {
+                        echo "Skipping CheDk install - allready installed"
+                    } else {
                 sh 'export CHEF_LICENSE=accepted'
                 sh 'sudo apt-get install -y wget'
                 sh 'wget https://packages.chef.io/files/stable/chefdk/3.8.14/ubuntu/18.04/chefdk_3.8.14-1_amd64.deb'
@@ -16,7 +21,7 @@ pipeline {
         }
         stage('Download Apache Cookbook') {
             steps {
-                git credentialsID: 'git-repo-creds', url: 'https://github.com/tverdich/apache.git'
+                git credentialsId: 'git-repo-creds', url: 'https://github.com/tverdich/apache.git'
                 echo "Download Apache Cookbook"
             }
         }
