@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('Delete the workspace') {
+        stage('Delete the workspaces') {
             steps {
                 sh "sudo rm -rf $WORKSPACE/*"
             }
@@ -25,6 +25,13 @@ pipeline {
             steps {
                 git credentialsId: 'git-repo-creds', url: 'git@github.com:tverdich/apache.git'
             }
+        stage("Install Kitchen Docker gem")    
+            steps {
+                script {
+                    sh 'chef gem install kitchen-docker'
+                }
+            }
+            
         }
     }
 }
