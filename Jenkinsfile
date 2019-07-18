@@ -5,7 +5,8 @@ pipeline {
             steps {
                 sh "sudo rm -rf $WORKSPACE/*"
             }
-        }
+           }
+           }
         stage('Installing ChefDK') {
             steps {
                 script {
@@ -34,6 +35,4 @@ pipeline {
             steps {
                     sh 'sudo kitchen test'
             } 
-        }
-    }
 }
