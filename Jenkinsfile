@@ -39,7 +39,7 @@ pipeline {
         }
         stage('Send Slack Notification') {
             steps {
-                slackSend color: 'warning', message: "Student-16 PLease approve ${env.JOB_NAME} ${env.BUILD_NUMBER} (<{$env.JOB_URL} | Open>)"
+                slackSend color: 'warning', message: "Student-8 PLease approve ${env.JOB_NAME} ${env.BUILD_NUMBER} (<{$env.JOB_URL} | Open>)"
             }
         }
         stage('Request input') {
@@ -49,7 +49,7 @@ pipeline {
         }
         stage('upload to chef server, converge nodes') {
             steps {
-                withCredentials([zip(credentialsId: 'chef-starter-zip', variable: 'CHEFREPO')]) {
+                withCredentials([zip(credentialsId: 'Chef-starter-zip1', variable: 'CHEFREPO')]) {
                     sh "mkdir -p $CHEFREPO/chef-repo/cookbooks/apache"
                     sh "mv $WORKSPACE/* $CHEFREPO/chef-repo/cookbooks/apache"
                     sh "sudo rm -rf $CHEFREPO/chef-repo/cookbooks/apache/Berksfile.lock"
