@@ -9,7 +9,7 @@ pipeline {
         stage('Installing ChefDK') {
             steps {
                 script {
-                    def exists = fileExits '/usr/bin/chef-client'
+                    def exists = fileExists '/usr/bin/chef-client'
                     if (exists) {
                         echo "Skipping CheDk install - allready installed"
                     } else {
