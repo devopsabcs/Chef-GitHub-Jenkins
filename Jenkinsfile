@@ -23,7 +23,7 @@ pipeline {
         }
         stage('Download Apache Cookbook') {
             steps {
-                git credentialsId: 'git-repo-creds', url: 'https://github.com/tverdich/apache.git'
+                git credentialsId: 'git-repo-creds', url: 'git@github.com:tverdich/apache.git'
             }
         }
     }
