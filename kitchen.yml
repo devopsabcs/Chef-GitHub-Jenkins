@@ -23,10 +23,12 @@ verifier:
   name: inspec
 
 platforms:
-  - name: ubuntu-18.04
+  - name: ubuntu-20.04
 
 suites:
   - name: default
+    run_list: 
+      - recipe[apache::default]
     verifier:
       inspec_tests:
         - test/integration/default
