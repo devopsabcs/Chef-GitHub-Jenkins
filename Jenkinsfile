@@ -94,6 +94,8 @@ pipeline {
                         //CHEATING by doing passwordless sudo on client nodes:
                         //sudo visudo
                         //emmanuel ALL=(ALL) NOPASSWD:ALL
+                        //double check emmanuel is a sudoer:
+                        //getent group sudo
                         sh "knife ssh 'role:webserver' -x emmanuel -i /var/lib/jenkins/.ssh/id_rsa 'sudo chef-client' -c $CHEFREPO/chef-repo/.chef/knife.rb"
                     }
                 }
