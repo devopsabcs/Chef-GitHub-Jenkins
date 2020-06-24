@@ -57,7 +57,10 @@ pipeline {
         }
         stage('Run Test kitchen') {
             steps {
-                sh 'sudo kitchen test'
+                sh '''
+                    export CHEF_LICENSE=accept
+                    sudo kitchen test
+                '''
             }
         }
         stage('Send Slack Notification') {
