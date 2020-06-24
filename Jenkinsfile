@@ -14,9 +14,9 @@ pipeline {
                         echo "Skipping ChefDK install - already installed"
                     } else {
                             sh 'export CHEF_LICENSE=accept'
-                            sh 'sudo apt-get install -y wget'
+                            sh 'apt-get install -y wget'
                             sh 'wget https://packages.chef.io/files/stable/chefdk/4.8.23/ubuntu/20.04/chefdk_4.8.23-1_amd64.deb'
-                            sh 'sudo dpkg -i chefdk_4.8.23-1_amd64.deb'                           
+                            sh 'dpkg -i chefdk_4.8.23-1_amd64.deb'                           
                     }
                 }
             }
