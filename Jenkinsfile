@@ -78,7 +78,7 @@ pipeline {
         }
         stage('upload to chef server, converge nodes') {
             steps {
-                withCredentials([zip(credentialsId: 'Chef-starter-zip1', variable: 'CHEFREPO')]) {
+                withCredentials([zip(credentialsId: 'chef-starter-onprem-zip', variable: 'CHEFREPO')]) {
                     sh "mkdir -p $CHEFREPO/chef-repo/cookbooks/apache"
                     sh "mv $WORKSPACE/* $CHEFREPO/chef-repo/cookbooks/apache"
                     sh "sudo rm -rf $CHEFREPO/chef-repo/cookbooks/apache/Berksfile.lock"
