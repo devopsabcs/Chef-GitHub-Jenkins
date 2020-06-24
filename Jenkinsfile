@@ -81,8 +81,7 @@ pipeline {
                 withCredentials([zip(credentialsId: 'chef-starter-onprem-zip', variable: 'CHEFREPO')]) {
                     sh "mkdir -p $CHEFREPO/chef-repo/cookbooks/apache"
                     sh "mv $WORKSPACE/* $CHEFREPO/chef-repo/cookbooks/apache"
-                    sh "sudo rm -rf $CHEFREPO/chef-repo/cookbooks/apache/Berksfile.lock"
-                    sh "knife ssl fetch"
+                    sh "sudo rm -rf $CHEFREPO/chef-repo/cookbooks/apache/Berksfile.lock"                    
                     sh "knife cookbook upload apache --force -o $CHEFREPO/chef-repo/cookbooks -c $CHEFREPO/chef-repo/.chef/knife.rb"
                     withCredentials([sshUserPrivateKey(credentialsId: 'agent-key', keyFileVariable: 'agentKey', passphraseVariable: '', usernameVariable: '')]) {
                         sh "knife ssh 'role:webserver' -x ubuntu -i $agentKey 'sudo chef-client' -c $CHEFREPO/chef-repo/.chef/knife.rb"
