@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Delete the workspace') {
             steps {
-                sh "rm -rf $WORKSPACE/*"
+                sh "sudo rm -rf $WORKSPACE/*"
             }
         }
         stage('Installing ChefDK') {
@@ -15,9 +15,9 @@ pipeline {
                     } else {                             
                             sh '''
                                export CHEF_LICENSE=accept
-                               apt-get install -y wget
+                               sudo apt-get install -y wget
                                wget https://packages.chef.io/files/stable/chefdk/4.8.23/ubuntu/20.04/chefdk_4.8.23-1_amd64.deb
-                               dpkg -i chefdk_4.8.23-1_amd64.deb
+                               sudo dpkg -i chefdk_4.8.23-1_amd64.deb
                             '''                         
                     }
                 }
