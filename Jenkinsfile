@@ -50,9 +50,10 @@ pipeline {
                 }
             }
         }
-        stage('Install Kitchen Docker Gem') {
+        stage('Install Ruby and Test Kitchen Docker Gem') {
             steps {
                 sh '''
+                    sudo apt-get install -y rubygems ruby-dev
                     export CHEF_LICENSE=accept
                     chef gem install kitchen-docker
                 '''
