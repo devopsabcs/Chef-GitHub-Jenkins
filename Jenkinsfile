@@ -84,7 +84,7 @@ pipeline {
                     sh "sudo rm -rf $CHEFREPO/chef-repo/cookbooks/apache/Berksfile.lock"                    
                     sh "knife cookbook upload apache --force -o $CHEFREPO/chef-repo/cookbooks -c $CHEFREPO/chef-repo/.chef/knife.rb"
                     withCredentials([sshUserPrivateKey(credentialsId: 'agent-key', keyFileVariable: 'agentKey', passphraseVariable: '', usernameVariable: '')]) {
-                        sh "knife ssh 'role:webserver' -x ubuntu -i $agentKey 'sudo chef-client' -c $CHEFREPO/chef-repo/.chef/knife.rb"
+                        sh "knife ssh 'role:webserver' -x emmanuel -i $agentKey 'sudo chef-client' -c $CHEFREPO/chef-repo/.chef/knife.rb"
                     }
                 }
             }
