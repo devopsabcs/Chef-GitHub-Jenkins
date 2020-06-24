@@ -12,11 +12,13 @@ pipeline {
                     def exists = fileExists '/usr/bin/chef-client'
                     if (exists) {
                         echo "Skipping ChefDK install - already installed"
-                    } else {
-                            sh 'export CHEF_LICENSE=accept'
-                            sh 'apt-get install -y wget'
-                            sh 'wget https://packages.chef.io/files/stable/chefdk/4.8.23/ubuntu/20.04/chefdk_4.8.23-1_amd64.deb'
-                            sh 'dpkg -i chefdk_4.8.23-1_amd64.deb'                           
+                    } else {                             
+                            sh '''
+                               export CHEF_LICENSE=accept
+                               apt-get install -y wget
+                               wget https://packages.chef.io/files/stable/chefdk/4.8.23/ubuntu/20.04/chefdk_4.8.23-1_amd64.deb
+                               dpkg -i chefdk_4.8.23-1_amd64.deb
+                            '''                         
                     }
                 }
             }
