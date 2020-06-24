@@ -86,9 +86,12 @@ pipeline {
                     sh "knife cookbook upload apache --force -o $CHEFREPO/chef-repo/cookbooks -c $CHEFREPO/chef-repo/.chef/knife.rb"
                     withCredentials([sshUserPrivateKey(credentialsId: 'agent-key-jenkins', keyFileVariable: 'AGENT_SSHKEY', passphraseVariable: '', usernameVariable: '')]) {
                         sh "cat $AGENT_SSHKEY"
-                        sh "knife ssh 'role:webserver' -x emmanuel -i $AGENT_SSHKEY 'ls -a' -c $CHEFREPO/chef-repo/.chef/knife.rb"
+                        sh "cat /var/lib/jenkins/.ssh/id_rsa"
+                        //sh "knife ssh 'role:webserver' -x emmanuel -i $AGENT_SSHKEY 'ls -a' -c $CHEFREPO/chef-repo/.chef/knife.rb"
+                        sh "knife ssh 'role:webserver' -x emmanuel -i /var/lib/jenkins/.ssh/id_rsa 'ls -a' -c $CHEFREPO/chef-repo/.chef/knife.rb"
                         //sh "knife ssh 'role:webserver' -x jenkins -i $AGENT_SSHKEY 'ls -a' -c $CHEFREPO/chef-repo/.chef/knife.rb"
-                        sh "knife ssh 'role:webserver' -x emmanuel -i $AGENT_SSHKEY 'sudo chef-client' -c $CHEFREPO/chef-repo/.chef/knife.rb"
+                        //sh "knife ssh 'role:webserver' -x emmanuel -i $AGENT_SSHKEY 'sudo chef-client' -c $CHEFREPO/chef-repo/.chef/knife.rb"
+                        sh "knife ssh 'role:webserver' -x emmanuel -i /var/lib/jenkins/.ssh/id_rsa 'sudo chef-client' -c $CHEFREPO/chef-repo/.chef/knife.rb"
                     }
                 }
             }
