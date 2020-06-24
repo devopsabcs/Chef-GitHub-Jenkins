@@ -17,7 +17,7 @@ describe file('/var/www/html/index.html') do
 			end
 
 describe command('curl localhost') do
-	its { 'stdout' } { should match(/Hello World/)}
+	its('stdout') { should match(/Hello World/)}
 	
 end	
 
