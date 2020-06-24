@@ -91,6 +91,9 @@ pipeline {
                         sh "knife ssh 'role:webserver' -x emmanuel -i /var/lib/jenkins/.ssh/id_rsa 'ls -a' -c $CHEFREPO/chef-repo/.chef/knife.rb"
                         //sh "knife ssh 'role:webserver' -x jenkins -i $AGENT_SSHKEY 'ls -a' -c $CHEFREPO/chef-repo/.chef/knife.rb"
                         //sh "knife ssh 'role:webserver' -x emmanuel -i $AGENT_SSHKEY 'sudo chef-client' -c $CHEFREPO/chef-repo/.chef/knife.rb"
+                        //CHEATING by doing passwordless sudo on client nodes:
+                        //sudo visudo
+                        //emmanuel ALL=(ALL) NOPASSWD:ALL
                         sh "knife ssh 'role:webserver' -x emmanuel -i /var/lib/jenkins/.ssh/id_rsa 'sudo chef-client' -c $CHEFREPO/chef-repo/.chef/knife.rb"
                     }
                 }
