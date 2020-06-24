@@ -82,11 +82,11 @@ pipeline {
                 withCredentials([zip(credentialsId: 'chef-starter-onprem-zip', variable: 'CHEFREPO')]) {
                     sh "mkdir -p $CHEFREPO/chef-repo/cookbooks/apache"
                     sh "sudo rm -rf $WORKSPACE/Berksfile.lock"
-                    //sh "mv $WORKSPACE/* $CHEFREPO/chef-repo/cookbooks/apache"                                        
-                    //sh "knife cookbook upload apache --force -o $CHEFREPO/chef-repo/cookbooks -c $CHEFREPO/chef-repo/.chef/knife.rb"
-                    //withCredentials([sshUserPrivateKey(credentialsId: 'agent-key', keyFileVariable: 'AGENT_SSHKEY', passphraseVariable: '', usernameVariable: '')]) {
-                    //    sh "knife ssh 'role:webserver' -x emmanuel -i $AGENT_SSHKEY 'sudo chef-client' -c $CHEFREPO/chef-repo/.chef/knife.rb"
-                    //}
+                    sh "mv $WORKSPACE/* $CHEFREPO/chef-repo/cookbooks/apache"                                        
+                    sh "knife cookbook upload apache --force -o $CHEFREPO/chef-repo/cookbooks -c $CHEFREPO/chef-repo/.chef/knife.rb"
+                    withCredentials([sshUserPrivateKey(credentialsId: 'agent-key-jenkins', keyFileVariable: 'AGENT_SSHKEY', passphraseVariable: '', usernameVariable: '')]) {
+                        sh "knife ssh 'role:webserver' -x emmanuel -i $AGENT_SSHKEY 'sudo chef-client' -c $CHEFREPO/chef-repo/.chef/knife.rb"
+                    }
                 }
             }
         }
