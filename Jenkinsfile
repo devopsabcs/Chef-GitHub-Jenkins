@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Delete the workspace') {
             steps {
-                sh "sudo rm -rf $WORKSPACE/*"
+                sh "rm -rf $WORKSPACE/*"
             }
         }
         stage('Installing ChefDK') {
