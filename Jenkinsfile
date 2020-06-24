@@ -26,7 +26,7 @@ pipeline {
         
         stage('Download Apache Cookbook') {
             steps {
-                git credentialsId: '', url: 'git@github.com:devopsabcs/Chef-GitHub-Jenkins.git'
+                git credentialsId: '', url: 'https://github.com/devopsabcs/Chef-GitHub-Jenkins.git'
             }
         }
         stage('Install Kitchen Docker Gem') {
