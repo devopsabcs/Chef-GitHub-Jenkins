@@ -52,15 +52,15 @@ pipeline {
         }
         stage('Install Kitchen Docker Gem') {
             steps {
-                sh 'chef gem install kitchen-docker'
+                sh '''
+                    export CHEF_LICENSE=accept
+                    chef gem install kitchen-docker
+                '''
             }
         }
         stage('Run Test kitchen') {
             steps {
-                sh '''
-                    export CHEF_LICENSE=accept
-                    sudo kitchen test
-                '''
+                sh 'sudo kitchen test'
             }
         }
         stage('Send Slack Notification') {
