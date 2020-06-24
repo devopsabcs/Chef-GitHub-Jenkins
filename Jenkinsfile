@@ -96,7 +96,7 @@ pipeline {
         }
         failure {
             echo "Build failed"
-            mail  body: "Build ${env.JOB_NAME} ${env.BUILD_NUMBER} failed. Please check the build at ${env.JOB_URL}", from: 'admin@myclass.email', subject: 'Build Failure', to: 'elon@technotrainer.com'
+            mail  body: "Build ${env.JOB_NAME} ${env.BUILD_NUMBER} failed. Please check the build at ${env.JOB_URL}", from: 'emmanuelknafo@gmail.com', subject: 'Build Failure', to: 'emmanuelknafo@gmail.com'
         }
     }
 }
