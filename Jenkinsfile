@@ -60,7 +60,10 @@ pipeline {
         }
         stage('Run Test kitchen') {
             steps {
-                sh 'sudo kitchen test'
+                sh '''
+                  gem env
+                  sudo kitchen test
+                '''
             }
         }
         stage('Send Slack Notification') {
