@@ -29,6 +29,27 @@ pipeline {
                 git credentialsId: '', url: 'https://github.com/devopsabcs/Chef-GitHub-Jenkins.git'
             }
         }
+        stage('Install Docker') {
+            steps {
+                script {
+                    def dockerExists = fileExists '/usr/bin/docker'
+                    if (dockerExists) {
+                        echo "Skipping Docker install - already installed"
+                    } else {                             
+                            sh '''                               
+                               wget https://download.docker.com/linux/ubuntu/dists/focal/pool/stable/amd64/containerd.io_1.2.13-2_amd64.deb
+                               wget https://download.docker.com/linux/ubuntu/dists/focal/pool/stable/amd64/docker-ce-cli_19.03.12~3-0~ubuntu-focal_amd64.deb
+                               wget https://download.docker.com/linux/ubuntu/dists/focal/pool/stable/amd64/docker-ce_19.03.12~3-0~ubuntu-focal_amd64.deb
+                               sudo dpkg -i containerd.io_1.2.13-2_amd64.deb
+                               sudo dpkg -i docker-ce-cli_19.03.12~3-0~ubuntu-focal_amd64.deb
+                               sudo dpkg -i docker-ce_19.03.12~3-0~ubuntu-focal_amd64.deb
+                               sudo usermod -aG root,docker ubuntu
+                            '''                         
+                    }
+                    sh 'sudo docker run hello-world'
+                }
+            }
+        }
         stage('Install Kitchen Docker Gem') {
             steps {
                 sh 'chef gem install kitchen-docker'
